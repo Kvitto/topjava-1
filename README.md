@@ -11,7 +11,7 @@ Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery +
 - [Wiki IDEA](https://github.com/JavaOPs/topjava/wiki/IDEA)
 - [Демо разрабатываемого приложения](http://topjava.herokuapp.com/)
 
-#### 27.09: Старт проекта
+#### 27.09: [Старт проекта](https://github.com/Kvitto/topjava-1/blob/doc/entrance.md)
 - Начало проверки [вступительного задания](https://github.com/JavaOPs/topjava#-Домашнее-задание-hw0)
 
 #### 04.10: 1-е занятие
