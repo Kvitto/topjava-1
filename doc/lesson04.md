@@ -2,9 +2,17 @@
 
 ## <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFfkxqbVpwZUd5anQ2TXE4bm5HbXhtVmkxMUxFSjhNQ1hXYVVTTTZEMzkzN2s">Материалы занятия</a>
 
+### ![correction](https://cloud.githubusercontent.com/assets/13649199/13672935/ef09ec1e-e6e7-11e5-9f79-d1641c05cbe6.png) Рефакторинг
+
+#### Apply 4_0_fix.patch
+- в классе `JdbcTemplate` есть настройки (`queryTimeout/ skipResultsProcessing/ skipUndeclaredResults`) уровня приложения (если они будут менятся, то, скорее всего, везде в приложении).
+Мы можем дополнительно сконфигурировать его в `spring-db.xml` и использовать в конструкторах `NamedParameterJdbcTemplate` и в `SimpleJdbcInsert` вместо `dataSource`.
+- поправил интерфейс `MealService.update`: контроллер и сервис при `update` ничего не возвращает
+- подправил имена методов в тестах
+
 ## ![hw](https://cloud.githubusercontent.com/assets/13649199/13672719/09593080-e6e7-11e5-81d1-5cb629c438ca.png) Разбор домашнего задания HW3
 
-> `SpringMain, InMemoryAdminRestControllerTest, InMemoryAdminRestControllerSpringTest` починим в патче **4_5_create_inmemory_test_ctx.patch (видео 4)**
+> `SpringMain, InMemoryAdminRestControllerTest, InMemoryAdminRestControllerSpringTest` починим в патче **4_5_create_mock_test_ctx.patch (видео 4)**
 
 ### ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 1. <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFdVhaMklZQVNkUGc">JdbcMealRepositoryImpl + MealServiceTest</a>
 #### **Apply 4_1_HW3.patch**
@@ -37,22 +45,19 @@
      - отключил в настройках (remove pattern) проверку assert в JUnit (проверяем через матчеры) и [`meta http-equiv="content-type"` в JSP](https://stackoverflow.com/a/45440410/548473)
      - сделал remove pattern на Cross Site Scripting ([XSS](https://ru.wikipedia.org/wiki/Межсайтовый_скриптинг)), будем делать защиту на последнем занятии
   - <a href="https://travis-ci.org/">Сборку и тесты Travis</a> (результат выполнения тестов проекта)
-     - [Что такое travis-ci.org](https://habr.com/post/140344/)
      - [Travis CI Tutorial](https://dzone.com/articles/travis-ci-tutorial-java-projects)
      - <a href="https://docs.travis-ci.com/user/languages/java/">Сборка Java проекта</a>
   - Сервис по проверке `maven` зависимостей VersionEye [закрыли](https://blog.versioneye.com/2017/10/26/the-start-of-a-new-journey). Ищу замену...
 - Сделайте `push` для отображения результатов текущего состояния проекта.
 
 #### **Apply 4_3_improve_code.patch**
-Для пояснения материала видео следал проверку предусловий `Objects.requireNonNull` и `Assert.notNull`. В реальном проекте везде используются один подход.
-
 > - Перенес проверки предусловий `Assert` из `InMemory` репозиториев в сервисы
 > - Добавил конфигурацию `.travis.yml`
 > - Сделал класс `Util` с новым методом `orElse` ([MealRestController.getBetween() has an NPath complexity of 625](https://app.codacy.com/app/javawebinar/topjava/issues/index?bid=6849888&filters=W3siaWQiOiJDYXRlZ29yeSIsInZhbHVlcyI6WyJFcnJvciBQcm9uZSJdfV0=))
 >   - [Цикломатическая_сложность (NPath complexity)](https://ru.wikipedia.org/wiki/Цикломатическая_сложность): количество линейно независимых маршрутов через программный код.
 
 - <a href="https://ru.wikipedia.org/wiki/Контрактное_программирование">Контрактное программирование</a>, <a href="http://neerc.ifmo.ru/wiki/index.php?title=Программирование_по_контракту">Программирование по контракту</a>
-- <a href="https://www.sw-engineering-candies.com/comparison-of-ways-to-check-preconditions-in-java">Comparison Preconditions in Java</a>
+- <a href="http://www.sw-engineering-candies.com/blog-1/comparison-of-ways-to-check-preconditions-in-java">Comparison Preconditions in Java</a>
 - IDEA Settings -> Plugins -> Browse repositories... Add [QAPlug: PMD/FindBugs/Checkstyle/Hammurapi](https://qaplug.com/about/)
   - Tools -> QAPlug -> Analyze Code...
 - IDEA [Analyze | Inspect Code](https://www.jetbrains.com/help/idea/running-inspections.html)
@@ -62,8 +67,7 @@
 -  [Инициализация базы при старте приложения](https://docs.spring.io/spring/docs/current/spring-framework-reference/data-access.html#jdbc-initializing-datasource-xml)
 
 ### ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 4. <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFNTNWV04weDBGSmc">Подмена контекста при тестировании</a>
-#### **Apply 4_5_create_inmemory_test_ctx.patch**
-> Переименовал `mock.xml` в `inmemory.xml`
+#### **Apply 4_5_create_mock_test_ctx.patch**
 
 ### ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 5. <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFVWZYcHoyUF9qX2M">ORM. Hibernate. JPA.</a>
 <a href="https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model">Entity</a>- класс (объект Java), который в ORM маппится в таблицу DB.
@@ -223,8 +227,8 @@ Hibernate (как любая ORM) реализует маппинг таблиц
 ## [Выпускной проект](graduation.md)
 - Для проекта я взял реальное тестовое задание, поэтому жалоб не неясность формулировок принимать не буду- сделайте как поняли. Представьте, что это ваше тестовое задание на работу.
 - Общение в канале Slack *#graduation*
-- Ревью проекта входит в участие с проверкой домашних заданий (ревьюится один раз!). Отдать на ревью нужно до 09.01.2019 (если идешь на проект "<a href="http://javaops.ru/reg/masterjava">Многомодульный maven. Многопоточность. XML (JAXB/StAX).
-    Веб сервисы (JAX-RS/SOAP). Удаленное взаимодействие (JMS/AKKA) (Masterjava)</a>", то срок до 31.03.2019).
+- Ревью проекта входит в участие с проверкой домашних заданий (ревьюится один раз!). Отдать на ревью нужно до 04.10 (если идешь на проект "<a href="http://javaops.ru/reg/masterjava">Многомодульный maven. Многопоточность. XML (JAXB/StAX).
+    Веб сервисы (JAX-RS/SOAP). Удаленное взаимодействие (JMS/AKKA) (Masterjava)</a>", то срок до 31.12).
 - По завершению ты сможешь занести этот проект в свое портфолио и резюме как собственный, без всяких оговорок.
 - Обязательно проверяйся [по рекомендациям в конце выпускного](graduation.md#-Рекомендации)
 

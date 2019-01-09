@@ -2,22 +2,13 @@
  
 ## [Материалы занятия](https://drive.google.com/drive/u/0/folders/0B9Ye2auQ_NsFT1NxdTFOQ1dvVnM)  (скачать все патчи можно через Download папки patch)
 
-### ![correction](https://cloud.githubusercontent.com/assets/13649199/13672935/ef09ec1e-e6e7-11e5-9f79-d1641c05cbe6.png) Рефакторинг
-
-#### Apply 3_0_1_switch_servlet_4.patch
-- Обновил зависимость до Servlet 4.0. Приложение нормально работает в [Tomcat 9.x](https://tomcat.apache.org/download-90.cgi)
-
-#### Apply 3_0_2_correct_meal_exceed.patch
-- Поправил грамматику: `exceed` (глагол) на `excess`.
-- Преименовал класс `MealWithExceed`, принимаю предложения [по лучшему названию класса](https://stackoverflow.com/questions/1724774/java-data-transfer-object-naming-convention)
-
 ## ![hw](https://cloud.githubusercontent.com/assets/13649199/13672719/09593080-e6e7-11e5-81d1-5cb629c438ca.png) Разбор домашнего задания HW02
 ### ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 1. <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFdDhnNHFMU2dKQzQ">HW2</a>
 > **ВНИМАНИЕ! При удалении класса из исходников, его скомпилированная версия все еще будет находиться в target (и classpath). В этом случае (или в любом другом, когда проект начинает глючить) сделайте `mvn clean`.**
 
 #### Apply 3_01_HW2_repository.patch
 > - В репозиториях по другому инстанциировал компараторы. [Оптимизация анонимных классов](http://stackoverflow.com/questions/19718353) не требуется! Почитайте комменты от Holger: *Java 8 relieves us from the need to think about such things at all*.
-> - Зарефакторил `<T extends Comparable<? super T>> DateTimeUtil.isBetween(T value, T start, T end)`. Метод теперь не зависит от date/time, перенес его в общий `Util` класс. Дженерики означают, что мы принимаем экземпляры класса, реализующего компаратор, который умеет сравнивать T или суперклассы от T.
+> - Зарефакторил `<T extends Comparable<? super T>> DateTimeUtil.isBetween(T value, T start, T end)`. Дженерики означают, что мы принимаем экземпляры класса, реализующего компаратор, который умеет сравнивать T или суперклассы от T
 > - Для фильтрации в `InMemoryMealRepositoryImpl` передаю `Predicate` анологично решению в `MealsUtil`
 > - В `InMemoryMealRepositoryImpl.save()` вместо 2-х разнесенных по времени операций
 >   - `get(meal.getId(), userId)`
@@ -25,10 +16,8 @@
 между которыми может вклинится операция удаления этой еды из другого потока, сделал обновление атомарным, используя `ConcurrentHashMap.computeIfPresent()` (см. псевдокод в `Map.computeIfPresent`. `ConcurrentHashMap` в отличие от `HashMap` делает операции атомарно).
 
 #### Apply 3_02_HW2_meal_layers.patch
-> - перенес обработку null-дат  в `MealRestController.getBetween()`
-> - по аналогии с `AbstractUserController` добавил проверку id пользователя, пришедшего в `MealRestController (assureIdConsistent, checkNew)`
-> - поправил интерфейс `MealService.update`: контроллер и сервис при `update` ничего не возвращает
-
+> - Перенес обработку null-дат  в `MealRestController.getBetween()`
+> - По аналогии с `AbstractUserController` добавил проверку id пользователя, пришедшего в `MealRestController (assureIdConsistent, checkNew)`
 
 #### Apply 3_03_HW2_optional_MealServlet.patch
 > - Убрал логирование (уже есть в контроллере)
@@ -37,7 +26,7 @@
 #### Apply 3_04_HW2_optional_filter.patch
 > - Вместо `MealServlet.resetParam` (перемещение параметров фильтрации в атрибуты запроса для отображения в `meals.jsp`), достаю их в jsp напрямую из запроса через [`${param.xxx}`](https://stackoverflow.com/a/1890462/548473)
 > - В демо фильтр не хранится в сессии (скидывается по F5). Что такое сессия будем разбирать, когда будем делать реальную авторизацию
-> - Цвет строк сделал через аттрибут `data-mealExcess` и css `tr[data-mealExcess=...]`
+> - Цвет строк сделал через аттрибут `data-mealExceed` и css `tr[data-mealExceed=...]`
 >   - [Использование data-* атрибутов](https://developer.mozilla.org/ru/docs/Web/Guide/HTML/Using_data_attributes) 
 
 #### Apply 3_05_HW2_optional_select_user.patch
@@ -65,17 +54,15 @@
    -  <a href="https://www.youtube.com/watch?v=cou_qomYLNU">Евгений Борисов. Spring, часть 2</a>
 
 ### ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png)  4. <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFODlkU1B0QnNnSGs">Тестирование через JUnit.</a>
-### ВНИМАНИЕ!! Перед накаткой патча создайте каталог test (из корня проекта путь `\src\test`), иначе часть файлов попадет в `src\main`.
-
 > - в `maven-surefire-plugin` (JUnit) <a href="http://stackoverflow.com/questions/17656475/maven-source-encoding-in-utf-8-not-working/17671104#17671104">поменял кодировку на UTF-8</a>
 > - добавил метод `InMemoryUserRepositoryImpl.init()` для инициализации.
 >   - `save()` больше не работает для  отсутствующих `id`
 >   - автогенерацию id начал со 100
-> - пакет `mock` переименовал в `inmemory`
 > - переименовал тестовые классы 
 
+### ВНИМАНИЕ!! Перед накаткой патча создайте каталог test (из корня проекта путь `\src\test`), иначе часть файлов попадет в `src\main`.
 #### Apply 3_07_add_junit.patch
-### После патча сделайте `clean` и [обновите зависимости Maven](https://github.com/JavaOPs/topjava/wiki/IDEA#%D0%9E%D0%B1%D0%BD%D0%BE%D0%B2%D0%B8%D1%82%D1%8C-%D0%B7%D0%B0%D0%B2%D0%B8%D1%81%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D0%B8-%D0%B2-maven-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B5), чтобы IDEA определила сорсы тестов
+### После патча [обновите зависимости Maven](https://github.com/JavaOPs/topjava/wiki/IDEA#%D0%9E%D0%B1%D0%BD%D0%BE%D0%B2%D0%B8%D1%82%D1%8C-%D0%B7%D0%B0%D0%B2%D0%B8%D1%81%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D0%B8-%D0%B2-maven-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B5), чтобы IDEA определила сорсы тестов
 #### ![question](https://cloud.githubusercontent.com/assets/13649199/13672858/9cd58692-e6e7-11e5-905d-c295d2a456f1.png) Вопрос: почему проект упадет при попытке открыть страничку еды (в логе смотреть самый верх самого нижнего исключения)?
 -  <a href="http://junit.org/junit4/">JUnit 4</a>
 -  <a href="http://habrahabr.ru/post/120101/">Тестирование в Java. JUnit</a>
@@ -88,7 +75,7 @@
 ### ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 6. <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFVlNYczhnSU9JdXc">Базы данных. Обзор NoSQL и Java persistence solution без ORM.</a>
 -  <a href="https://ru.wikipedia.org/wiki/PostgreSQL">PostgreSQL</a>.
 -  [PostgreSQL JDBC Driver](https://github.com/pgjdbc/pgjdbc)
--  <a href="http://java-course.ru/begin/postgresql/">Установка PostgreSQL</a>. **ВНИМАНИЕ! с Postgres 11 есть проблемы.** 
+-  <a href="http://java-course.ru/begin/postgresql/">Установка PostgreSQL</a>. **ВНИМАНИЕ! с postgres 9.6 возможны проблемы.** 
 -  Чтобы избежать проблем с правами и именами каталогов, [**рекомендуют установить postgres в простой каталог, например `C:\Postgresql`**. И при проблемах создать каталог data на другом диске](https://stackoverflow.com/questions/43432713/postgresql-installation-on-windows-8-1-database-cluster-initialisation-failed). Если Unix, [проверить права доступа к папке (0700)](http://www.sql.ru/forum/765555/permissions-should-be-u-rwx-0700).
     
 > Создать в pgAdmin новую базу `topjava` и новую роль `user`, пароль `password`
@@ -131,9 +118,7 @@ GRANT ALL PRIVILEGES ON DATABASE topjava TO "user";
 > в `JdbcUserRepositoryImpl.getByEmail()` заменил `queryForObject()` на `query()`. Загляните в код: `queryForObject` бросает `EmptyResultDataAccessException` вместо нужного нам `null`.
 
 #### Apply 3_10_db_implementation.patch
-> - в `JdbcUserRepositoryImpl.save()` добавил проверку на несуществующей в базе `User.id`
-> - в классе `JdbcTemplate` есть настройки (`queryTimeout/ skipResultsProcessing/ skipUndeclaredResults`) уровня приложения (если они будут менятся, то, скорее всего, везде в приложении).
-  Мы можем дополнительно сконфигурировать его в `spring-db.xml` и использовать в конструкторах `NamedParameterJdbcTemplate` и в `SimpleJdbcInsert` вместо `dataSource`.
+> В `JdbcUserRepositoryImpl.save()` добавил проверку на несуществующей в базе `User.id`
 
 -  Подключение <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/data-access.html#jdbc">Spring Jdbc</a>.
 -  Конфигурирование DataSource. <a href="http://www.mkyong.com/spring/spring-propertyplaceholderconfigurer-example/">Property Placeholder</a>
@@ -235,7 +220,6 @@ UNIQUE индекс нужен для обеcпечения уникальнос
 - 6 Почнинить `SpringMain, InMemory*Test`. `InMemory*Test` **должны использовать реализацию в памяти**
 - 7 Сделать индексы к таблице `Meals`: запретить создавать у одного и того-же юзера еду с одинаковой dateTime.
 Индекс на pk (id) postgres создает автоматически: <a href="http://stackoverflow.com/questions/970562/postgres-and-indexes-on-foreign-keys-and-primary-keys">Postgres and Indexes on Foreign Keys and Primary Keys</a>
-  - [PostgreSQL: индексы](https://postgrespro.ru/docs/postgresql/10/indexes-intro)
   - <a href="http://postgresguide.com/performance/indexes.html">Postgres Guide: Indexes</a>
   - [Оптимизация запросов. Основы EXPLAIN в PostgreSQL](https://habrahabr.ru/post/203320/)
   - [Оптимизация запросов. Часть 2](https://habrahabr.ru/post/203386/)
