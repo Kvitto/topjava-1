@@ -11,10 +11,10 @@ Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery +
 - [Wiki IDEA](https://github.com/JavaOPs/topjava/wiki/IDEA)
 - [Демо разрабатываемого приложения](http://topjava.herokuapp.com/)
 
-#### 27.09: [Старт проекта](https://github.com/Kvitto/topjava-1/blob/doc/entrance.md)
+#### [Старт проекта](https://github.com/Kvitto/topjava-1/blob/doc/entrance.md)
 - Начало проверки [вступительного задания](https://github.com/JavaOPs/topjava#-Домашнее-задание-hw0)
 
-#### 04.10: 1-е занятие
+#### [1-е занятие](https://github.com/Kvitto/topjava-1/blob/doc/lesson01.md)
 - Разбор домашнего задания вступительного занятия (вместе с Optional)
 - Обзор используемых в проекте технологий. Интеграция ПО
 - Maven
@@ -23,7 +23,7 @@ Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery +
 - Уровни и зависимости логгирования. JMX
 - Домашнее задание 1-го занятия (HW1 + Optional)
 
-#### 11.10: 2-е занятие
+#### [2-е занятие](https://github.com/Kvitto/topjava-1/blob/doc/lesson02.md)
 - Разбор домашнего задания HW1 + Optional
 - Библиотека vs Фреймворк. Стандартные библиотеки Apache Commons, Guava
 - Слои приложения. Создание каркаса приложения
@@ -31,7 +31,7 @@ Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery +
 - Пояснения к HW2. Обработка Autowired
 - Домашнее задание (HW2 + Optional)
 
-#### 18.10: 3-е занятие
+#### [3-е занятие](https://github.com/Kvitto/topjava-1/blob/doc/lesson03.md)
 - Разбор домашнего задания HW2 + Optional
 - Жизненный цикл Spring контекста
 - Тестирование через JUnit
@@ -43,7 +43,7 @@ Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery +
 - Логирование тестов
 - Домашнее задание (HW3 + Optional)
 
-#### 25.10: 4-е занятие
+#### [4-е занятие](https://github.com/Kvitto/topjava-1/blob/doc/lesson04.md)
 - Разбор домашнего задания HW3 + Optional
 - Методы улучшения качества кода
 - Spring: инициализация и популирование DB
@@ -52,7 +52,7 @@ Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery +
 - Поддержка HSQLDB
 - Домашнее задание (HW4 + Optional)
 
-#### 01.11: 5-е занятие
+#### [5-е занятие](https://github.com/Kvitto/topjava-1/blob/doc/lesson05.md)
 - Разбор вопросов
 - Разбор домашнего задания HW4 + Optional
 - Транзакции
@@ -62,7 +62,7 @@ Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery +
 - Spring кэш
 - Домашнее задание (HW5 + Optional)
 
-#### 08.11: 6-е занятие
+#### [6-е занятие](https://github.com/Kvitto/topjava-1/blob/doc/lesson06.md)
 - Разбор домашнего задания HW5 + Optional
 - Кэш Hibernate
 - Spring Web
@@ -73,9 +73,9 @@ Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery +
 - Spring Internationalization
 - Домашнее задание (HW6 + Optional)
 
-#### Большое ДЗ + выпускной проект + подтягиваем "хвосты".
+#### [Большое ДЗ + выпускной проект + подтягиваем "хвосты"](https://github.com/Kvitto/topjava-1/blob/doc/graduation.md)
 
-#### 22.11: 7-е занятие
+#### [7-е занятие](https://github.com/Kvitto/topjava-1/blob/doc/lesson07.md)
 - Разбор домашнего задания HW6 + Optional
 - Автогенерация DDL по модели
 - Тестирование Spring MVC
@@ -86,7 +86,7 @@ Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery +
 - Тестирование через SoapUi. UTF-8
 - Домашнее задание (HW7 + Optional)
 
-#### 29.11: 8-е занятие
+#### [8-е занятие](https://github.com/Kvitto/topjava-1/blob/doc/lesson08.md)
 - Разбор домашнего задания HW7 + Optional
 - WebJars. jQuery и JavaScript frameworks
 - Bootstrap
@@ -95,7 +95,7 @@ Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery +
 - Добавление Spring Security
 - Домашнее задание (HW8 + Optional)
 
-#### 06.12: 9-е занятие
+#### [9-е занятие](https://github.com/Kvitto/topjava-1/blob/doc/lesson09.md)
 - Разбор домашнего задания HW8 + Optional
 - Spring Binding
 - Spring Validation
@@ -107,7 +107,7 @@ Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery +
 - Cookie. Session
 - Домашнее задание (HW9 + Optional)
 
-#### 13.12: 10-е занятие
+#### [10-е занятие](https://github.com/Kvitto/topjava-1/blob/doc/lesson10.md)
 - Разбор домашнего задания HW10 + Optional
 - Spring Security Taglib. Method Security Expressions
 - Интерсепторы. Редактирование профиля. JSP tag files
@@ -118,7 +118,7 @@ Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery +
 - Защита от межсайтовой подделки запросов (CSRF)
 - Домашнее задание (HW10)
 
-#### 20.12: 11-е занятие
+#### [11-е занятие](https://github.com/Kvitto/topjava-1/blob/doc/lesson11.md)
 - Разбор домашнего задания HW10 + Optional
 - Рефакторинг
 - Фильтруем JSON через @JsonView 
